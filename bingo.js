@@ -54,8 +54,9 @@ var BingoForm = {
         for (var i = 0; i < numerosPorColumna; i++) {
             var $fila = $('<tr>')
             for (var j = 0; j < columnas; j++) {
-                var numero = i + j * numerosPorColumna;
-                if (numero > 0 && numero <= maxNumero) {
+                var numero = j * numerosPorColumna + i + 1
+    
+                if (numero <= maxNumero) {
                     $fila.append('<td class="numero" style="color: white;">' + numero + '</td>')
                 } else {
                     $fila.append('<td class="numero"></td>')
