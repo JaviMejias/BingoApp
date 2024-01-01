@@ -135,6 +135,19 @@ var BingoForm = {
         }
     },
 
+    validarInputs: function(input) {
+        valorActual = input.value.replace(/[^0-9]/g, '')
+
+        if (valorActual) {
+            var numero = parseInt(valorActual, 10)
+            if (numero < 1 || numero > BingoForm.numeroMaximo) {
+                valorActual = valorActual.slice(0, -1)
+            }
+        }
+
+        input.value = valorActual
+    },
+
     toggleTombola: function (tombola) {
         if(this.tombolaGirada != true){
             this.tombolaGirada = true
@@ -215,7 +228,6 @@ var BingoForm = {
         BingoForm.actualizarUltimoNumeroRegistrado()
         BingoForm.actualizarNumeroAnterior()
 
-        // Habilitar controles deshabilitados
         $("#numeroInput").prop("disabled", false)
         $("#ingresarBtn").prop("disabled", false)
         $("#toggleTombola").prop("disabled", false)
@@ -230,8 +242,7 @@ var BingoForm = {
         }
 
         this.updateTextOnToggle()
-    
-        // Reiniciar la tabla de números y la tabla de bingo según sea necesario
+
         BingoForm.generarTablaNumeros(BingoForm.numeroMaximo)
         BingoForm.generarTablaBingoDinamica(BingoForm.bingoRow, BingoForm.bingoColumns)
     },
@@ -306,6 +317,10 @@ var BingoForm = {
             if (e.which === 13) {
                 $("#buscarBtn").click()
             }
+        })
+
+        $("#numeroInput, #buscarInput").on("input", function() {
+            BingoForm.validarInputs(this)
         })
 
         $('#toggleTombola').on('click', function () {
