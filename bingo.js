@@ -148,6 +148,15 @@ var BingoForm = {
         input.value = valorActual
     },
 
+    validarInputNumerico: function(input, max) {
+        var valor = $(input).val()
+        var valorNumerico = parseInt(valor, 10)
+    
+        if (!valor.match(/^\d+$/) || valorNumerico < 1 || valorNumerico > max) {
+            $(input).val(valor.slice(0, -1))
+        }
+    },
+
     toggleTombola: function (tombola) {
         if(this.tombolaGirada != true){
             this.tombolaGirada = true
@@ -333,6 +342,18 @@ var BingoForm = {
 
         $('#tablaBingo').on('click', 'td:not(.casilla-central)', function () {
             $(this).toggleClass('marcada')
+        })
+
+        $('#numeroMaximo').on('input', function() {
+            BingoForm.validarInputNumerico(this, 100)
+        })
+        
+        $('#filasBingo').on('input', function() {
+            BingoForm.validarInputNumerico(this, 10)
+        })
+        
+        $('#columnasBingo').on('input', function() {
+            BingoForm.validarInputNumerico(this, 10)
         })
 
         $("#resetGame").on("click", function () {
