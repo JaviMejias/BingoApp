@@ -91,6 +91,34 @@ var BingoForm = {
         )
     },
 
+    updateNumberFromtable: function(incorrect_number, correct_number){
+        if (BingoForm.numerosIngresados.includes(incorrect_number.toString())) {
+            if(BingoForm.numerosIngresados.includes(correct_number.toString())){
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Número ya existe en la tabla',
+                })
+            }
+            else{
+                BingoForm.numerosIngresados = BingoForm.numerosIngresados.filter(function(num) {
+                    return num !== incorrect_number
+                })
+                $('#tablaNumeros tbody td').each(function () {
+                    if ($(this).text() === incorrect_number) {
+                        $(this).css("color", "white")
+                    }
+                })
+                BingoForm.addNumberToTable(correct_number)
+            }
+        }
+        else{
+            Swal.fire({
+                icon: 'info',
+                title: 'Número no encontrado',
+            })
+        }
+    },
+
     addNumberToTable: function (number) {
         if (BingoForm.numerosIngresados.includes(number.toString())) {
             Swal.fire({
@@ -164,6 +192,7 @@ var BingoForm = {
             $("#ingresarBtn").prop("disabled", true)
             $("#toggleTombola").prop("disabled", true)
             $('.configurarTablasModal').prop("disabled", true)
+            $('#correctNumberButton').prop("disabled", true)
         }
         
         tombola.prop("disabled", true)
@@ -215,6 +244,7 @@ var BingoForm = {
         $('.numeroInput').toggle()
         $('#ingresarBtn').toggle()
         $('#tombolaNumber').toggle()
+        $('#correctNumberButton').toggle()
         this.updateTextOnToggle()
     },
 
@@ -242,6 +272,7 @@ var BingoForm = {
         $("#toggleTombola").prop("disabled", false)
         $("#tombolaNumber").prop("disabled", false)
         $('.configurarTablasModal').prop("disabled", false)
+        $('$correctNumberButton').prop("disabled", false)
 
         $('#numeroInput').val("")
         $('#buscarInput').val("")
@@ -328,7 +359,7 @@ var BingoForm = {
             }
         })
 
-        $("#numeroInput, #buscarInput").on("input", function() {
+        $("#numeroInput, #buscarInput, #incorrectNumber, #correctNumber").on("input", function() {
             BingoForm.validarInputs(this)
         })
 
@@ -354,6 +385,17 @@ var BingoForm = {
         
         $('#columnasBingo').on('input', function() {
             BingoForm.validarInputNumerico(this, 10)
+        })
+
+        $('#correctNumberButton').on('click', function() {
+            $('#correctNumberModal').show()
+        })
+
+        $('#submitCorrection').on('click', function() {
+            var incorrectNumber = $('#incorrectNumber').val()
+            var correctNumber = $('#correctNumber').val()
+        
+            BingoForm.updateNumberFromtable(incorrectNumber, correctNumber)
         })
 
         $("#resetGame").on("click", function () {

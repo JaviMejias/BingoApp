@@ -9,69 +9,69 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-9">
-                    <div class="form-group row text-center">
-                        <label for="numeroInput" class="col-sm-3 col-form-label numero_label"><b>Ingresar Número:</b></label>
-                        <button class="btn btn-primary" style="margin-left: 15px;" id="tombolaNumber"><b>Girar Tombola</b></button>
-                        <div class="col-sm-3 numeroInput">
-                            <input type="text" class="form-control numeroInput" id="numeroInput">
-                        </div>
-                        <div class="col-sm-2">
-                            <button class="btn btn-primary" id="ingresarBtn"><b>Ingresar</b></button>
-                        </div>
-                        <div class="col-sm-4">
-                            <button class="btn btn-primary" id="toggleTombola"><b>Simular Tombola</b></button>
-                        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="form-group row text-center">
+                    <label for="numeroInput" class="col-sm-2 col-form-label numero_label"><b>Ingresar Número:</b></label>
+                    <button class="btn btn-primary" style="margin-left: 15px;" id="tombolaNumber"><b>Girar Tombola</b></button>
+                    <div class="col-sm-2 numeroInput">
+                        <input type="text" class="form-control numeroInput" id="numeroInput">
                     </div>
-                    <div class="form-group row">
-                        <label for="buscarInput" class="col-sm-3 col-form-label"><b>Buscar Número:</b></label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" id="buscarInput">
-                        </div>
-                        <div class="col-sm-2">
-                            <button class="btn btn-success" id="buscarBtn"><b>Buscar</b></button>
-                        </div>
-                        <div class="col-sm-2">
-                            <button class="btn btn-warning" id="resetGame"><b>Reiniciar</b></button>
-                        </div>
-                        <div class="col-sm-2">
-                            <button class="btn btn-info configurarTablasModal" data-toggle="modal" data-target="#configurarTablasModal">
-                                <b>Configurar Tablas</b>
-                            </button>
-                        </div>
+                    <div class="col-sm-2 ">
+                        <button class="btn btn-primary" id="ingresarBtn"><b>Ingresar</b></button>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <p>
-                                <h5>Número anterior:</h5>
-                                <h5><span id="numeroAnterior"></span></h5>
-                            </p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p>
-                                <h5>Último número:</h5>
-                                <h5><span id="ultimoNumeroRegistrado"></span></h5>
-                            </p>
-                        </div>
+                    <div class="col-sm-2" id="correctNumberButton">
+                        <button id="correctNumberButton" class="btn btn-primary" data-toggle="modal" data-target="#correctionModal"><b>Corregir número</b></button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary" id="toggleTombola"><b>Simular Tombola</b></button>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <table class="table table-bordered" id="tablaBingo">
-                        <tbody>
-                        </tbody>
-                    </table>
+                <div class="form-group row">
+                    <label for="buscarInput" class="col-sm-2 col-form-label"><b>Buscar Número:</b></label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="buscarInput">
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-success" id="buscarBtn"><b>Buscar</b></button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-warning" id="resetGame"><b>Reiniciar</b></button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-info configurarTablasModal" data-toggle="modal" data-target="#configurarTablasModal">
+                            <b>Configurar Tablas</b>
+                        </button>
+                    </div>
                 </div>
-                <table class="table table-bordered" id="tablaNumeros">
-                    <thead>
-                    </thead>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <p>
+                            <h5>Número anterior:</h5>
+                            <h5><span id="numeroAnterior"></span></h5>
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>
+                            <h5>Último número:</h5>
+                            <h5><span id="ultimoNumeroRegistrado"></span></h5>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <table class="table table-bordered" id="tablaBingo">
                     <tbody>
                     </tbody>
                 </table>
             </div>
+            <table class="table table-bordered" id="tablaNumeros">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
-
         <div class="modal fade" id="configurarTablasModal" tabindex="-1" role="dialog" aria-labelledby="configurarTablasModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-config" role="document">
                 <div class="modal-content">
@@ -101,7 +101,31 @@
                 </div>
             </div>
         </div>
-
+        <div class="modal fade" id="correctionModal" tabindex="-1" role="dialog" aria-labelledby="correctNumberModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-config" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="correctNumberModalLabel">Corregir Número</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="correctionForm">
+                            <div class="mb-3">
+                                <label for="incorrectNumber" class="form-label">Número Incorrecto</label>
+                                <input type="text" class="form-control" id="incorrectNumber" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="correctNumber" class="form-label">Número Correcto</label>
+                                <input type="text" class="form-control" id="correctNumber" required>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="submitCorrection">Guardar Cambios</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
