@@ -272,7 +272,7 @@ var BingoForm = {
         $("#toggleTombola").prop("disabled", false)
         $("#tombolaNumber").prop("disabled", false)
         $('.configurarTablasModal').prop("disabled", false)
-        $('$correctNumberButton').prop("disabled", false)
+        $('#correctNumberButton').prop("disabled", false)
 
         $('#numeroInput').val("")
         $('#buscarInput').val("")
