@@ -350,12 +350,14 @@ var BingoForm = {
         $("#numeroInput").on("keypress", function (e) {
             if (e.which === 13) {
                 $("#ingresarBtn").click()
+                $(this).val('')
             }
         })
 
         $("#buscarInput").on("keypress", function (e) {
             if (e.which === 13) {
                 $("#buscarBtn").click()
+                $(this).val('')
             }
         })
 
