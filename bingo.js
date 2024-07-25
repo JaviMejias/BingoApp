@@ -94,10 +94,7 @@ var BingoForm = {
     updateNumberFromtable: function(incorrect_number, correct_number){
         if (BingoForm.numerosIngresados.includes(incorrect_number.toString())) {
             if(BingoForm.numerosIngresados.includes(correct_number.toString())){
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Número ya existe en la tabla',
-                })
+                BingoForm.swalAlert('info', 'Número ya existe en la tabla')
             }
             else{
                 BingoForm.numerosIngresados = BingoForm.numerosIngresados.filter(function(num) {
@@ -109,22 +106,20 @@ var BingoForm = {
                     }
                 })
                 BingoForm.addNumberToTable(correct_number)
+                BingoForm.swalAlert('success', 'Número actualizado correctamente')
+                $('#incorrectNumber').val('')
+                $('#correctNumber').val('')
+                $('#correctionModal').modal('hide')
             }
         }
         else{
-            Swal.fire({
-                icon: 'info',
-                title: 'Número no encontrado',
-            })
+            BingoForm.swalAlert('info', 'Número no encontrado')
         }
     },
 
     addNumberToTable: function (number) {
         if (BingoForm.numerosIngresados.includes(number.toString())) {
-            Swal.fire({
-                icon: 'info',
-                title: 'Número ya ingresado',
-            })
+            BingoForm.swalAlert('info', 'Número ya ingresado')
             return
         }
 
@@ -156,10 +151,7 @@ var BingoForm = {
         })
 
         if (!encontrado) {
-            Swal.fire({
-                icon: 'info',
-                title: 'Número no encontrado',
-            })
+            BingoForm.swalAlert('info', 'Número no encontrado')
         }
     },
 
@@ -232,7 +224,7 @@ var BingoForm = {
                     modalBody.text(selectedNumber).css("font-size", "10em")
                 }
             }
-        }, 50)
+        }, 3)
 
         modal.modal({
             backdrop: 'static',
@@ -297,6 +289,13 @@ var BingoForm = {
         $('#configurarTablasModal').modal('hide')
     },
 
+    swalAlert: function(icon, title) {
+        Swal.fire({
+            icon: icon,
+            title: title,
+        })
+    },
+
     setup: function () {
         $('.update_tables').on('click', function (e) {
             e.preventDefault()
@@ -311,10 +310,7 @@ var BingoForm = {
                 BingoForm.updateTables(numeroMaximo, filasBingo, columnasBingo)
             }
             else{
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Debe ingresar todos los valores',
-                })
+                BingoForm.swalAlert('info', 'Debe ingresar todos los valores')
             }
         })
 
@@ -337,6 +333,7 @@ var BingoForm = {
             var inputNumber = $("#numeroInput").val()
             if(inputNumber != ''){
                 BingoForm.addNumberToTable(inputNumber)
+                $("#numeroInput").val('')
             }
         })
 
@@ -344,20 +341,19 @@ var BingoForm = {
             var searchNumber = $("#buscarInput").val()
             if(searchNumber != ''){
                 BingoForm.searchOnTable(searchNumber)
+                $("#buscarInput").val('')
             }
         })
 
         $("#numeroInput").on("keypress", function (e) {
             if (e.which === 13) {
                 $("#ingresarBtn").click()
-                $(this).val('')
             }
         })
 
         $("#buscarInput").on("keypress", function (e) {
             if (e.which === 13) {
                 $("#buscarBtn").click()
-                $(this).val('')
             }
         })
 
@@ -396,8 +392,16 @@ var BingoForm = {
         $('#submitCorrection').on('click', function() {
             var incorrectNumber = $('#incorrectNumber').val()
             var correctNumber = $('#correctNumber').val()
-        
-            BingoForm.updateNumberFromtable(incorrectNumber, correctNumber)
+
+            if(incorrectNumber == '' && correctNumber == '') {
+                BingoForm.swalAlert('info', 'Debe llenar ambos campos')
+            } else if(incorrectNumber == ''){
+                BingoForm.swalAlert('info', 'Número incorrecto vacío')
+            } else if(correctNumber == '') {
+                BingoForm.swalAlert('info', 'Número correcto vacío')
+            } else {
+                BingoForm.updateNumberFromtable(incorrectNumber, correctNumber)
+            }
         })
 
         $("#resetGame").on("click", function () {
