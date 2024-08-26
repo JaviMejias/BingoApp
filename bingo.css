@@ -5,14 +5,11 @@ body {
     background-color: #fff; /* Cambio de color de fondo */
 }
 
-h2 {
-    color: #3498db;
-}
-
 #numeroInput,
 #buscarInput,
 button {
-    margin-bottom: 10px; /* Ajuste del margen inferior */
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 /* Estilo de la tabla de números */
@@ -86,29 +83,9 @@ button {
     color: white;
 }
 
-#tablaBingo {
-    max-width: 250px;
-    margin: auto;
-}
-
-#tablaBingo th,
-#tablaBingo td {
-    padding: 5px;
-}
-
-#tablaBingo th {
-    background-color: #3498db;
-    color: white;
-}
-
-.form-group {
-    margin: 10px;
-    padding: 7px 0 0 0;
-}
-
-.table-bordered {
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.table {
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .row {
