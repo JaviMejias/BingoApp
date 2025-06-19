@@ -18,7 +18,7 @@ Esta aplicación ha sido diseñada para ser extremadamente fácil de usar y no r
 
 1.  **Descargar el Proyecto:**
     * Si estás en GitHub, puedes clonar el repositorio:
-        `git clone [URL_DE_TU_REPOSITORIO]`
+        `git clone git@github.com:JaviMejias/BingoApp.git`
     * O simplemente descarga el archivo ZIP del proyecto.
 
 2.  **Extraer (si es ZIP):** Si descargaste un archivo ZIP, extráelo en la ubicación de tu preferencia.
